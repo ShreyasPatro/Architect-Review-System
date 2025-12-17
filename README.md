@@ -1,4 +1,5 @@
 Keystone: Architect Review Dashboard
+Author: Shreyas Patro 
 Zero-friction document review tracking for high-velocity engineering teams.
 
 Keystone is a real-time "Command Center" for Engineering Design Reviews (EDRs). It solves the "Google Doc Purgatory" problem by automatically syncing, scoring, and visualizing technical reviews directly from your Google Drive.
