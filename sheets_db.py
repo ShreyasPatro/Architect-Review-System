@@ -168,12 +168,19 @@ def upsert_documents(documents):
         
         # --- LOGIC UPDATE START ---
         
-        # 1. Check for Archive Override (from sync_daemon)
-        if doc.get('status_override') == 'Archived':
-            status = 'Archived'
-            # Optional: preserve notes even if archived
-            if link in existing_map:
-                notes = existing_map[link].get('Notes', '')
+       # 1. Check if we are passing new notes (from App)
+        if 'notes' in doc:
+             notes = doc['notes']
+        # Else try to load existing notes
+        elif link in existing_map:
+             notes = existing_map[link].get('Notes', '')
+
+        # 2. Check for Status Override (from App or Archive)
+        if doc.get('status_override'):
+             status = doc['status_override']
+        # Else preserve existing status
+        elif link in existing_map:
+             status = existing_map[link].get('Status', 'Pending')
 
         # 2. Preserve existing Status/Notes (if not forcing Archive)
         elif link in existing_map:
